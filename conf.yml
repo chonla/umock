@@ -1,0 +1,35 @@
+server:
+  host: 0.0.0.0
+  port: 8000
+routes:
+  - method: get
+    path: /
+    when:
+      query:
+        - id=7771
+    then:
+      headers:
+        - Content-Type=application/json
+      body: |
+        {}
+  - method: get
+    path: /hello/:name
+    when:
+      query:
+        - id=7771
+    then:
+      headers:
+        - Content-Type=application/json
+      body: |
+        {}
+  - method: post
+    path: /
+    when:
+      form:
+        - id=3331
+    then:
+      status: 888
+      headers:
+        - Content-Type=application/json
+      body: |
+        {}
