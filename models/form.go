@@ -2,10 +2,12 @@ package models
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/url"
 	"strings"
 
 	"github.com/chonla/umock/helpers"
+	"github.com/kr/pretty"
 )
 
 type Form []string
@@ -23,14 +25,18 @@ func (f Form) Test(values url.Values) bool {
 		}
 		fExpected[fPair[0]] = append(fExpected[fPair[0]], fPair[1])
 	}
+	pretty.Println(fExpected)
 
 	for kExpected, vExpected := range fExpected {
+		fmt.Println("Expected:", kExpected, vExpected)
 		if vActual, ok := valuesMap[kExpected]; ok {
+			fmt.Println("Actual:", vActual)
 			if !helpers.HasSomeInCommon(vExpected, vActual) {
 				return false
 			}
 		} else {
 			// Request does not contain some expected value.
+			fmt.Println("No expected value")
 			return false
 		}
 	}

@@ -22,7 +22,8 @@ routes:
         - Content-Type=application/json
       body: |
         {}
-  - method: post
+  - name: POST form body
+    method: post
     path: /
     when:
       form:
@@ -33,3 +34,18 @@ routes:
         - Content-Type=application/json
       body: |
         {}
+  - name: POST json body
+    method: post
+    path: /
+    when:
+      content_type: application/json
+      jsonBody:
+        - employee.id=3331
+    then:
+      status: 200
+      headers:
+        - Content-Type=application/json
+      body: |
+        {
+          "name": "Chonla"
+        }
