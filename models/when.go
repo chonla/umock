@@ -30,7 +30,7 @@ func (w When) Test(r *http.Request, log *logger.Logger) bool {
 		log.Debug("  Matching Content-Type ... PASSED")
 
 		if r.Header.Get("Content-Type") == "application/json" {
-			if !w.JsonBody.Test(r.Body, log) {
+			if !w.JsonBody.Test(r, log) {
 				log.Debug("  Matching JSON Body ... FAILED")
 				return false
 			}

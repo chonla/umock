@@ -34,12 +34,12 @@ routes:
         - Content-Type=application/json
       body: |
         {}
-  - name: POST json body
+  - name: POST json body with id = 3331
     method: post
     path: /
     when:
       content_type: application/json
-      jsonBody:
+      json_body:
         - employee.id=3331
     then:
       status: 200
@@ -48,4 +48,19 @@ routes:
       body: |
         {
           "name": "Chonla"
+        }
+  - name: POST json body with id = 3332
+    method: post
+    path: /
+    when:
+      content_type: application/json
+      json_body:
+        - employee.id=3332
+    then:
+      status: 200
+      headers:
+        - Content-Type=application/json
+      body: |
+        {
+          "name": "Lion King"
         }
