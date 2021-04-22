@@ -14,7 +14,7 @@ type When struct {
 }
 
 func (w When) Test(r *http.Request, log *logger.Logger) bool {
-	if !w.Query.Test(r.URL.Query()) {
+	if !w.Query.Test(r.URL.Query(), log) {
 		log.Debug("    Matching Querystring ... FAILED")
 		return false
 	}

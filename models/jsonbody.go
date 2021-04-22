@@ -6,7 +6,6 @@ import (
 	"strings"
 
 	"github.com/chonla/umock/logger"
-	"github.com/kr/pretty"
 	"github.com/tidwall/gjson"
 )
 
@@ -25,13 +24,15 @@ func (j JsonBody) Test(r io.ReadCloser, log *logger.Logger) bool {
 	for _, jValue := range j {
 		jPair := strings.SplitN(jValue, "=", 2)
 		if len(jPair) != 2 {
+			log.Debug("      Unable to extract key-value from condition: %s", jValue)
 			return false
 		}
 		value := gjson.Get(body, jPair[0])
-		pretty.Println(jPair[1], value.String())
 		if jPair[1] != value.String() {
+			log.Debug("      Matching %s ... FAILED", jPair[1])
 			return false
 		}
+		log.Debug("      Matching %s ... PASSED", jPair[1])
 	}
 
 	return true
