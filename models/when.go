@@ -21,13 +21,14 @@ func (w When) Test(r *http.Request, log *logger.Logger) bool {
 	log.Debug("  Matching Querystring ... PASSED")
 
 	if r.Method == "POST" || r.Method == "PUT" || r.Method == "PATCH" {
+		log.Debug("  Detected Content-Type: %s", r.Header.Get("Content-Type"))
+
 		if !w.ContentType.Test(r.Header.Get("Content-Type")) {
 			log.Debug("  Matching Content-Type ... FAILED")
 			return false
 		}
 		log.Debug("  Matching Content-Type ... PASSED")
 
-		log.Debug("  Detected Content-Type: %s", r.Header.Get("Content-Type"))
 		if r.Header.Get("Content-Type") == "application/json" {
 			if !w.JsonBody.Test(r.Body, log) {
 				log.Debug("  Matching JSON Body ... FAILED")
