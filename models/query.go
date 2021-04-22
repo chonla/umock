@@ -16,12 +16,12 @@ func (q Query) Test(values url.Values, log *logger.Logger) bool {
 	b, _ := json.Marshal(values)
 	json.Unmarshal(b, &valuesMap)
 
-	log.Debug("      Form Body Condition(s): %d", len(q))
+	log.Debug("    Querystring Condition(s): %d", len(q))
 	qExpected := map[string][]string{}
 	for _, qValue := range q {
 		qPair := strings.SplitN(qValue, "=", 2)
 		if len(qPair) != 2 {
-			log.Debug("      Unable to extract key-value from condition: %s", qValue)
+			log.Debug("    Unable to extract key-value from condition: %s", qValue)
 			return false
 		}
 		if _, ok := qExpected[qPair[0]]; !ok {
@@ -33,13 +33,13 @@ func (q Query) Test(values url.Values, log *logger.Logger) bool {
 	for kExpected, vExpected := range qExpected {
 		if vActual, ok := valuesMap[kExpected]; ok {
 			if !helpers.HasSomeInCommon(vExpected, vActual) {
-				log.Debug("      Matching %s ... FAILED", kExpected)
+				log.Debug("    Matching %s ... FAILED", kExpected)
 				return false
 			}
-			log.Debug("      Matching %s ... PASSED", kExpected)
+			log.Debug("    Matching %s ... PASSED", kExpected)
 		} else {
 			// Request does not contain some expected value.
-			log.Debug("      Matching %s ... FAILED", kExpected)
+			log.Debug("    Matching %s ... FAILED", kExpected)
 			return false
 		}
 	}
