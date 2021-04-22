@@ -9,7 +9,7 @@ import (
 func (h *StartHandler) Start() error {
 	h.initializeHandler()
 
-	h.log.Trace("Starting server at %s ...\n", h.conf.Server.String())
+	h.log.Trace("Starting Micromock server at %s ...\n", h.conf.Server.String())
 	if err := http.ListenAndServe(h.conf.Server.String(), nil); err != nil {
 
 	}
