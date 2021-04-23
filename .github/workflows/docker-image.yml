@@ -17,6 +17,8 @@ jobs:
     - name: Get the version and commit info
       id: vars
       run: |
+        git describe --tags
+        git describe --tag
         echo "::set-output name=VERSION::$(git describe --tags)"
         echo "::set-output name=COMMIT_ID::$(git rev-parse HEAD)"
     - name: Build the Docker image
