@@ -1,4 +1,4 @@
-module github.com/chonla/umock
+module umock
 
 go 1.16
 

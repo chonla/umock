@@ -3,7 +3,7 @@ package start
 import (
 	"net/http"
 
-	"github.com/chonla/umock/helpers"
+	"umock/helpers"
 )
 
 func (h *StartHandler) Start() error {

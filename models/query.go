@@ -5,8 +5,8 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/chonla/umock/helpers"
-	"github.com/chonla/umock/logger"
+	"umock/helpers"
+	"umock/logger"
 )
 
 type Query []string

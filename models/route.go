@@ -3,7 +3,7 @@ package models
 import (
 	"net/http"
 
-	"github.com/chonla/umock/logger"
+	"umock/logger"
 )
 
 type Route struct {
