@@ -7,17 +7,10 @@ WORKDIR /app
 
 COPY . ./
 
-# RUN go mod tidy
+RUN CGO_ENABLED=0 GOOS=linux go build -a -o umock -ldflags="-X 'main.Version=${VERSION}' -X 'main.CommitID=${COMMIT_ID}'" .
 
-RUN CGO_ENABLED=0 GOOS=linux go build -a -o umock .
+FROM alpine:3.13
 
-# RUN go build -o umock -ldflags="-X 'main.Version=${VERSION}' -X 'main.CommitID=${COMMIT_ID}'"
-# RUN go build -o umock
+WORKDIR /app
 
-# RUN /app/umock version
-
-# FROM alpine:3.13
-
-# WORKDIR /app
-
-# COPY --from=builder /app/umock .
+COPY --from=builder /app/umock .

@@ -30,27 +30,27 @@ func main() {
 		log.Debug("Turn on DEBUG mode ...")
 	}
 
-	conf := models.Config{}
-	confFile := "./conf.yml"
-	if args.Options.Has("conf") {
-		confFile = args.Options.Get("conf")[0]
-	}
-	log.Debug("Use configuration file from %s\n", confFile)
-
-	configContent, err := ioutil.ReadFile(confFile)
-	if err != nil {
-		log.Error("unable to read configuration from %s.\n", confFile)
-		os.Exit(1)
-	}
-
-	err = yaml.Unmarshal([]byte(configContent), &conf)
-	if err != nil {
-		log.Error("%v\n", err)
-		os.Exit(1)
-	}
-
 	switch args.Command {
 	case "start":
+		conf := models.Config{}
+		confFile := "./conf.yml"
+		if args.Options.Has("conf") {
+			confFile = args.Options.Get("conf")[0]
+		}
+		log.Debug("Use configuration file from %s\n", confFile)
+
+		configContent, err := ioutil.ReadFile(confFile)
+		if err != nil {
+			log.Error("unable to read configuration from %s.\n", confFile)
+			os.Exit(1)
+		}
+
+		err = yaml.Unmarshal([]byte(configContent), &conf)
+		if err != nil {
+			log.Error("%v\n", err)
+			os.Exit(1)
+		}
+
 		h, err := start.New(conf, log)
 		if err != nil {
 			log.Error("%v\n", err)
