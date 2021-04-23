@@ -58,6 +58,6 @@ func main() {
 
 		h.Start()
 	case "version":
-		log.Trace("%s %s(%s)", Name, Version, CommitID)
+		log.Trace("%s %s (%s)", Name, Version, CommitID[0:6])
 	}
 }

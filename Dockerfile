@@ -10,8 +10,8 @@ COPY . .
 RUN go mod download
 
 RUN go build -o umock -ldflags="\
--X 'github.com/chonla/umock/main.Version=${VERSION}' \
--X 'github.com/chonla/umock/main.CommitID=${COMMIT_ID}'" main.go
+-X 'main.Version=$(git describe --tags)' \
+-X 'main.CommitID=$(git rev-parse HEAD)'" main.go
 
 FROM alpine:3.13
 
