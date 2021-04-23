@@ -15,14 +15,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Get the version and commit info
-      id: get_version
+      id: vars
       run: |
-        echo "::set-output name=VERSION::${GITHUB_REF#refs/tags/}"
-        echo "::set-output name=COMMID_ID::$(git rev-parse HEAD)"
+        echo "::set-output name=VERSION::${git describe --tag}"
+        echo "::set-output name=COMMIT_ID::$(git rev-parse HEAD)"
     - name: Build the Docker image
       run: |
         docker build . \
-        --build-arg VERSION=${{ steps.get_version.outputs.VERSION }} \
-        --build-arg COMMIT_ID=${{ steps.get_version.outputs.COMMIT_ID }} \
+        --build-arg VERSION=${{ steps.vars.outputs.VERSION }} \
+        --build-arg COMMIT_ID=${{ steps.vars.outputs.COMMIT_ID }} \
         --file Dockerfile \
-        --tag chonla/umock:${{ steps.get_version.outputs.VERSION }}
+        --tag chonla/umock:${{ steps.vars.outputs.VERSION }}
