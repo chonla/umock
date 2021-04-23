@@ -17,9 +17,7 @@ jobs:
     - name: Get the version and commit info
       id: vars
       run: |
-        git describe --tags
-        git describe --tag
-        echo "::set-output name=VERSION::$(git describe --tags)"
+        echo "::set-output name=VERSION::$(cat VERSION)"
         echo "::set-output name=COMMIT_ID::$(git rev-parse HEAD)"
     - name: Build the Docker image
       run: |
@@ -27,4 +25,5 @@ jobs:
         --build-arg VERSION=${{ steps.vars.outputs.VERSION }} \
         --build-arg COMMIT_ID=${{ steps.vars.outputs.COMMIT_ID }} \
         --file Dockerfile \
-        --tag chonla/umock:${{ steps.vars.outputs.VERSION }}
+        --tag chonla/umock:${{ steps.vars.outputs.VERSION }} \
+        --tag chonla/umock:latest
