@@ -5,8 +5,8 @@ import (
 	"net/url"
 	"strings"
 
-	"umock/helpers"
-	"umock/logger"
+	"github.com/chonla/umock/helpers"
+	"github.com/chonla/umock/logger"
 )
 
 type Form []string

@@ -1,8 +1,8 @@
 package start
 
 import (
-	"umock/logger"
-	"umock/models"
+	"github.com/chonla/umock/logger"
+	"github.com/chonla/umock/models"
 )
 
 type StartHandler struct {

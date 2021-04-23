@@ -5,9 +5,9 @@ import (
 	"io/ioutil"
 	"os"
 
-	"umock/handlers/start"
-	"umock/logger"
-	"umock/models"
+	"github.com/chonla/umock/handlers/start"
+	"github.com/chonla/umock/logger"
+	"github.com/chonla/umock/models"
 
 	"github.com/chonla/cliargs"
 	"gopkg.in/yaml.v2"

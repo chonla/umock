@@ -3,7 +3,7 @@ package models
 import (
 	"net/http"
 
-	"umock/logger"
+	"github.com/chonla/umock/logger"
 )
 
 type When struct {

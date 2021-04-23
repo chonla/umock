@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strings"
 
-	"umock/logger"
+	"github.com/chonla/umock/logger"
 
 	"github.com/tidwall/gjson"
 )
