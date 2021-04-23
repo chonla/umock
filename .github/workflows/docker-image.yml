@@ -1,0 +1,28 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Get the version and commit info
+      id: get_version
+      run: |
+        echo "::set-output name=VERSION::${GITHUB_REF#refs/tags/}"
+        echo "::set-output name=COMMID_ID::$(git rev-parse HEAD)"
+    - name: Build the Docker image
+      run: |
+        docker build . \
+        --build-arg VERSION=${{ steps.get_version.outputs.VERSION }} \
+        --build-arg COMMIT_ID=${{ steps.get_version.outputs.COMMIT_ID }} \
+        --file Dockerfile \
+        --tag chonla/umock:${{ steps.get_version.outputs.VERSION }}
