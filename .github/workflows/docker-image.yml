@@ -19,11 +19,12 @@ jobs:
       run: |
         echo "::set-output name=VERSION::$(cat VERSION)"
         echo "::set-output name=COMMIT_ID::$(git rev-parse --short HEAD)"
-    - name: Build the Docker image
+    - name: Authenticate to docker
       uses: docker/login-action@v1
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: Build the docker image
       run: |
         docker build . \
         --build-arg VERSION=${{ steps.vars.outputs.VERSION }} \
@@ -31,3 +32,6 @@ jobs:
         --file Dockerfile \
         --tag chonla/umock:${{ steps.vars.outputs.VERSION }} \
         --tag chonla/umock:latest
+    - name: Store docker images
+      run: |
+        docker push chonla/umock --all-tags
