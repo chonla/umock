@@ -12,6 +12,10 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
+var Name = "Micromock"
+var Version = "Development"
+var CommitID = ""
+
 func main() {
 	args, err := cliargs.Parse()
 	if err != nil {
@@ -53,5 +57,7 @@ func main() {
 		}
 
 		h.Start()
+	case "version":
+		log.Trace("%s %s(%s)", Name, Version, CommitID)
 	}
 }
