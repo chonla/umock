@@ -1,7 +1,7 @@
 FROM golang:1.16.3-alpine3.13 AS builder
 
-ARG VERSION="$(git describe --tags)"
-ARG COMMIT_ID="$(git rev-parse HEAD)"
+ARG VERSION=""
+ARG COMMIT_ID=""
 
 WORKDIR /app
 
@@ -10,8 +10,8 @@ COPY . .
 RUN go mod download
 
 RUN go build -o umock -ldflags="\
--X 'main.Version=$(git describe --tags)' \
--X 'main.CommitID=$(git rev-parse HEAD)'" main.go
+-X 'main.Version=$(VERSION)' \
+-X 'main.CommitID=$(COMMIT_ID)'" main.go
 
 FROM alpine:3.13
 
