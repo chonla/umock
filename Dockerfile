@@ -10,8 +10,8 @@ COPY . .
 RUN go mod download
 
 RUN go build -o umock -ldflags="\
--X 'main.Version=$(VERSION)' \
--X 'main.CommitID=$(COMMIT_ID)'" main.go
+-X 'main.Version=${VERSION}' \
+-X 'main.CommitID=${COMMIT_ID}'" main.go
 
 FROM alpine:3.13
 
