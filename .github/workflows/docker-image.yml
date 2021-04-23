@@ -18,7 +18,7 @@ jobs:
       id: vars
       run: |
         echo "::set-output name=VERSION::$(cat VERSION)"
-        echo "::set-output name=COMMIT_ID::$(git rev-parse HEAD)"
+        echo "::set-output name=COMMIT_ID::$(git rev-parse --short HEAD)"
     - name: Build the Docker image
       run: |
         docker build . \
