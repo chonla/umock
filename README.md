@@ -37,9 +37,11 @@ server:
 routes:
   - name: <name-of-route> # can be omitted
     method: <request-method> # get, post, delete, put, patch, ...
-    path: <request-path> # e.g., /
+    path: <request-path> # e.g., /. request path can contain parameters with ":parameter-name" format
     when:
       content_type: <request-content-type> # can be omitted, default = application/x-www-form-urlencoded
+      param: # use param to match path parameters
+        - id=1721
       query: # use query when method is get
         - id=7771
       form: # use form when content type is application/x-www-form-urlencoded
