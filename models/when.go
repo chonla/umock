@@ -8,17 +8,24 @@ import (
 
 type When struct {
 	ContentType ContentType `yaml:"content_type"`
+	Param       Param       `yaml:"param"`
 	Query       Query       `yaml:"query"`
 	Form        Form        `yaml:"form"`
 	JsonBody    JsonBody    `yaml:"json_body"`
 }
 
-func (w When) Test(r *http.Request, log *logger.Logger) bool {
+func (w When) Test(r *http.Request, params map[string]string, log *logger.Logger) bool {
 	if !w.Query.Test(r.URL.Query(), log) {
 		log.Debug("  Matching Querystring ... FAILED")
 		return false
 	}
 	log.Debug("  Matching Querystring ... PASSED")
+
+	if !w.Param.Test(params, log) {
+		log.Debug("  Matching Path Params ... FAILED")
+		return false
+	}
+	log.Debug("  Matching Path Params ... PASSED")
 
 	if r.Method == "POST" || r.Method == "PUT" || r.Method == "PATCH" {
 		log.Debug("  Detected Content-Type: %s", r.Header.Get("Content-Type"))

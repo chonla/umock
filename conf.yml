@@ -13,6 +13,32 @@ routes:
       body: |
         {}
   - method: get
+    path: /hello/:id
+    when:
+      param: 
+        - id=1221
+    then:
+      headers:
+        - Content-Type=application/json
+      body: |
+        {
+          "message": "Hello 1221!"
+        }
+  - name: Multiple params
+    method: get
+    path: /hello/:name/employee/:id
+    when:
+      param: 
+        - name=peter
+        - id=1221
+    then:
+      headers:
+        - Content-Type=application/json
+      body: |
+        {
+          "message": "Hello Peter!"
+        }
+  - method: get
     path: /hello/:name
     when:
       query:

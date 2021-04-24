@@ -35,7 +35,9 @@ func (o Route) Match(r *http.Request, log *logger.Logger) bool {
 		return true
 	}
 
-	if !o.When.Test(r, log) {
+	pathParams, _ := o.Path.ExtractParameters(r.URL.Path)
+
+	if !o.When.Test(r, pathParams, log) {
 		// Condition does not meet
 		log.Debug("  Matching When ... FAILED")
 		return false
