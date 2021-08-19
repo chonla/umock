@@ -18,6 +18,7 @@ func (t Then) Respond(w http.ResponseWriter) {
 			w.Header().Add(hPair[0], hPair[1])
 		}
 	}
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	if t.Status > 0 {
 		w.WriteHeader(t.Status)
 	}
