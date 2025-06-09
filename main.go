@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 
 	"github.com/chonla/umock/handlers/start"
@@ -39,7 +38,7 @@ func main() {
 		}
 		log.Debug("Use configuration file from %s\n", confFile)
 
-		configContent, err := ioutil.ReadFile(confFile)
+		configContent, err := os.ReadFile(confFile)
 		if err != nil {
 			log.Error("unable to read configuration from %s.\n", confFile)
 			os.Exit(1)

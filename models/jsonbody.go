@@ -2,7 +2,7 @@ package models
 
 import (
 	"bytes"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"strings"
 
@@ -14,13 +14,13 @@ import (
 type JsonBody []string
 
 func (j JsonBody) Test(r *http.Request, log *logger.Logger) bool {
-	b, err := ioutil.ReadAll(r.Body)
+	b, err := io.ReadAll(r.Body)
 	if err != nil {
 		// JSON cannot be parsed
 		return false
 	}
 
-	r.Body = ioutil.NopCloser(bytes.NewBuffer(b))
+	r.Body = io.NopCloser(bytes.NewBuffer(b))
 
 	body := string(b)
 
